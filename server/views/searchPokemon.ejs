@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards Pokemon</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-height: calc(100vh - 180px);
+            overflow-y: auto;
+        }
+
+        .card {
+            width: calc(16.66% - 20px);
+            padding: 5px;
+        }
+
+        .card img {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        form {
+            margin-bottom: 10px;
+        }
+
+        .pages {
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 20px;
+        }
+        .home-button {
+        display: inline-block;
+        padding: 1.8px 17px;
+        background-color: #f0f0f0;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        border: 1px solid #000000;
+        border-radius: 2.5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .home-button:hover {
+        background-color: #dddddd;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Cards Pokemon</h1>
+        <form action="/searchPokemon" method="POST">
+            <label for="pokemonName">Nome do Pokémon:</label>
+            <input type="text" id="pokemonName" name="pokemonName">
+            <button type="submit">Pesquisar</button>
+            <a href="/homePokemon" class="home-button">Home</a>
+        </form>
+    </div>
+    <div class="container">
+        <% cards.forEach(card => { %>
+        <div class="card">
+            <% if (card && card.images && card.images.small) { %>
+            <img src="<%= card.images.small %>" alt="<%= card.name %>">
+            <% } else { %>
+            <p>Imagem não disponível</p>
+            <% } %>
+        </div>
+        <% }); %>
+    </div>
+    <div class="pages">
+        <% if (currentPage > 1) { %>
+        <% } %>
+        <% const numPagesToShow = 3; %>
+        <% const startPage = Math.max(1, currentPage - numPagesToShow); %>
+        <% const endPage = Math.min(totalPages, currentPage + numPagesToShow); %>
+        <% for (let i = startPage; i <= endPage; i++) { %>
+            <%= i %>
+        </a>
+        <% } %>
+        <% if (currentPage < totalPages) { %>
+        <% } %>
+    </div>
+
+</body>
+
+</html>
